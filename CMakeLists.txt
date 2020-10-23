@@ -17,4 +17,5 @@ else()
     message(FATAL_ERROR "Unknown build type: Use Debug/Release")
 endif()
 
-add_executable(techdemo src/main.cpp)
+add_subdirectory(src/engine)
+add_subdirectory(src/techdemo)
