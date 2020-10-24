@@ -1,4 +1,7 @@
-
+### Project related ###
+build
+lib/*
+!lib/download-libs.*
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,emacs,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,visualstudiocode,emacs,c++
 
@@ -88,6 +91,7 @@ flycheck_*.el
 
 
 ### VisualStudioCode ###
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
