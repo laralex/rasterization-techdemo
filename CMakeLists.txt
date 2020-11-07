@@ -26,6 +26,12 @@ set(${OUTPUT_DIRECTORY} ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 message(STATUS "> BUILD TYPE = ${CMAKE_BUILD_TYPE}")
 
 # ==== install external libs ====
+set(EXTERN_BUILD_DIR ${CMAKE_BINARY_DIR}/extern)
+# TODO(laralex): check if Debug project build builds Release externals
+set(EXTERN_SOURCE_DIR ${CMAKE_SOURCE_DIR}/extern)
+add_subdirectory(${EXTERN_SOURCE_DIR}/spdlog ${EXTERN_BUILD_DIR}/spdlog)
+list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/spdlog/include)
+
 # ==== project libraries and executables ====
 # TODO(laralex): need to install libraries in some way (put files in e.g. /include and /lib)
 add_subdirectory(src/engine ${${OUTPUT_DIRECTORY}}/obj/engine)

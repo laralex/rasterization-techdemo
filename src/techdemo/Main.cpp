@@ -1,11 +1,11 @@
-#include <iostream>
+#include <spdlog/spdlog.h>
 #include "engine/core/Core.hpp"
 #include "engine/render/Render.hpp"
 
 int main() {
-    std::cout << "Engine has been launched" << std::endl;
-    std::cout << engine::render::echo(42) << std::endl;
-    std::cout << engine::core::echo(42) << std::endl;
-    std::cout << "Engine has been shut down" << std::endl;
+    spdlog::info("Engine has been launched");
+    spdlog::info(engine::render::echo(42));
+    spdlog::info(engine::core::echo(42));
+    spdlog::info("Engine has been shut down");
     return 0;
 }
