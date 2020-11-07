@@ -20,11 +20,14 @@ elseif(NOT ${CMAKE_BUILD_TYPE} IN_LIST ${BUILD_TYPES})
 endif()
 
 # ==== artifacts folders ====
+# TODO(laralex): need to tidy up artifacts from external libraries and CMake itself
 string(TOUPPER "CMAKE_RUNTIME_OUTPUT_DIRECTORY_${CMAKE_BUILD_TYPE}" OUTPUT_DIRECTORY) # debug to DEBUG
 set(${OUTPUT_DIRECTORY} ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 message(STATUS "> BUILD TYPE = ${CMAKE_BUILD_TYPE}")
 
-# ==== libraries and executables ====
+# ==== install external libs ====
+# ==== project libraries and executables ====
+# TODO(laralex): need to install libraries in some way (put files in e.g. /include and /lib)
 add_subdirectory(src/engine ${${OUTPUT_DIRECTORY}}/obj/engine)
 add_subdirectory(src/techdemo ${${OUTPUT_DIRECTORY}}/obj/techdemo)
 

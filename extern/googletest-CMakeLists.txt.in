@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.2)
 
 project(googletest NONE)
 
-# NOTE: ${GTEST_PATH} comes from main CMakeLists.txt
+# NOTE(laralex): GTEST_PATH comes from main CMakeLists.txt
 
 include(ExternalProject)
 ExternalProject_Add(googletest
