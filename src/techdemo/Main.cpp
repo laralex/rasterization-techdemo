@@ -1,6 +1,6 @@
 #include <iostream>
-#include <engine/core/Core.hpp>
-#include <engine/render/Render.hpp>
+#include "engine/core/Core.hpp"
+#include "engine/render/Render.hpp"
 
 int main() {
     std::cout << "Engine has been launched" << std::endl;

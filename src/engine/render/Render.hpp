@@ -1,5 +1,5 @@
+#include "engine/core/Commons.h"
 #include <cstdint>
-
 namespace engine::render {
-    std::int32_t echo(std::int32_t message);
+    ENGINE_API std::int32_t echo(std::int32_t message);
 }
