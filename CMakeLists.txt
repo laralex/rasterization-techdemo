@@ -30,6 +30,7 @@ message(STATUS "> BUILD TYPE = ${CMAKE_BUILD_TYPE}")
 set(EXTERN_BUILD_DIR ${CMAKE_BINARY_DIR}/extern)
 set(EXTERN_SOURCE_DIR ${CMAKE_SOURCE_DIR}/extern)
 
+# TODO(laralex): check if I can disable building of tests and examples
 add_subdirectory(${EXTERN_SOURCE_DIR}/spdlog ${EXTERN_BUILD_DIR}/spdlog)
 list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/spdlog/include)
 
@@ -43,6 +44,8 @@ add_library(glad STATIC ${EXTERN_SOURCE_DIR}/glad/src/glad.c)
 target_include_directories(glad PRIVATE ${EXTERN_SOURCE_DIR}/glad/include)
 list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/glad/include)
 
+add_subdirectory(${EXTERN_SOURCE_DIR}/glm ${EXTERN_BUILD_DIR}/glm)
+list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/glm/include)
 
 # ==== project libraries and executables ====
 # TODO(laralex): need to install libraries in some way (put files in e.g. /include and /lib)

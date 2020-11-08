@@ -2,14 +2,17 @@
 #include "engine/core/Core.hpp"
 
 //#define GLFW_INCLUDE_NONE
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "spdlog/spdlog.h"
-
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <spdlog/spdlog.h>
+#include <glm/mat4x4.hpp>
+#include <glm/ext/matrix_clip_space.hpp> // glm::perspective
+#include <glm/ext/scalar_constants.hpp>
 namespace engine::render 
 {
     
 ENGINE_API std::int32_t echo(std::int32_t message) {
+    glm::mat4 Projection = glm::perspective(glm::pi<float>() * 0.25f, 4.0f / 3.0f, 0.1f, 100.f);
     auto answer = engine::core::echo(message);
     return answer;
 }
