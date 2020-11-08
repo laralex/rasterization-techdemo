@@ -10,3 +10,6 @@
 [submodule "extern/glad"]
 	path = extern/glad
 	url = https://github.com/Dav1dde/glad.git
+[submodule "extern/imgui_/imgui"]
+	path = extern/imgui_/imgui
+	url = https://github.com/ocornut/imgui.git

@@ -49,6 +49,19 @@ list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/glad/include)
 add_subdirectory(${EXTERN_SOURCE_DIR}/glm ${EXTERN_BUILD_DIR}/glm)
 list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/glm/include)
 
+set(IMGUI_INCLUDE_DIR ${EXTERN_SOURCE_DIR}/imgui_)
+set(IMGUI_BACKENDS_DIR ${IMGUI_INCLUDE_DIR}/imgui/backends)
+file(GLOB   IMGUI_SRC_FILES ${IMGUI_INCLUDE_DIR}/imgui/*.cpp)
+list(APPEND IMGUI_SRC_FILES ${IMGUI_BACKENDS_DIR}/imgui_impl_glfw.cpp ${IMGUI_BACKENDS_DIR}/imgui_impl_opengl3.cpp)
+add_library(imgui STATIC ${IMGUI_SRC_FILES})
+# TODO(laralex): maybe not PRIVATE
+target_include_directories(imgui PRIVATE ${IMGUI_INCLUDE_DIR}/imgui ${EXTERN_SOURCE_DIR}/glfw/include)
+target_compile_definitions(imgui PRIVATE 
+    -DIMGUI_IMPL_OPENGL_LOADER_GLAD -DIMGUI_USER_CONFIG="${CMAKE_SOURCE_DIR}/src/engine/gui/custom_imgui_config.h")
+target_link_libraries(imgui glfw glad)
+# NOTE: I like including via <imgui/imgui.h>, but imgui internals sadly use just "imgui.h", so I have to expose them like that
+list(APPEND EXTERN_INCLUDE_DIRS ${IMGUI_INCLUDE_DIR} ${IMGUI_INCLUDE_DIR}/imgui) 
+
 # ==== project libraries and executables ====
 # TODO(laralex): need to install libraries in some way (put files in e.g. /include and /lib)
 add_subdirectory(src/engine ${${OUTPUT_DIRECTORY}}/obj/engine)
