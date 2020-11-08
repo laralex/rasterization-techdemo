@@ -40,8 +40,10 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(${EXTERN_SOURCE_DIR}/glfw ${EXTERN_BUILD_DIR}/glfw)
 list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/glfw/include)
 
-add_library(glad STATIC ${EXTERN_SOURCE_DIR}/glad/src/glad.c)
-target_include_directories(glad PRIVATE ${EXTERN_SOURCE_DIR}/glad/include)
+set(GLAD_API "gl=4.5")
+set(GLAD_EXTENSIONS "GL_ARB_vertex_shader,GL_ARB_fragment_shader")
+set(GLAD_PROFILE "compatibility")
+add_subdirectory(${EXTERN_SOURCE_DIR}/glad ${EXTERN_BUILD_DIR}/glad)
 list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/glad/include)
 
 add_subdirectory(${EXTERN_SOURCE_DIR}/glm ${EXTERN_BUILD_DIR}/glm)
