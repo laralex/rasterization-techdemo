@@ -1,8 +1,9 @@
 include(GoogleTest)
 
 # ==== build Google Test ====
+# NOTE: not a git submodule so that it's not downloaded unless you build with tests
 set(GTEST_PATH ${EXTERN_BUILD_DIR}/googletest)
-configure_file(${CMAKE_SOURCE_DIR}/extern/googletest-CMakeLists.txt.in ${GTEST_PATH}/CMakeLists.txt)
+configure_file(${CMAKE_SOURCE_DIR}/extern/googletest/CMakeLists.txt.in ${GTEST_PATH}/CMakeLists.txt)
 
 # cmake step
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
