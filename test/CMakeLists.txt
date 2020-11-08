@@ -1,7 +1,7 @@
 include(GoogleTest)
 
 # ==== build Google Test ====
-set(GTEST_PATH ${CMAKE_BINARY_DIR}/extern/googletest)
+set(GTEST_PATH ${EXTERN_BUILD_DIR}/googletest)
 configure_file(${CMAKE_SOURCE_DIR}/extern/googletest-CMakeLists.txt.in ${GTEST_PATH}/CMakeLists.txt)
 
 # cmake step
@@ -29,7 +29,7 @@ add_subdirectory(${GTEST_PATH}/src ${GTEST_PATH}/build EXCLUDE_FROM_ALL)
 # ==== to shrink repetitive code ====
 macro(assemble_test TESTNAME FILES)
     add_executable(${TESTNAME} ${FILES})
-    target_include_directories(${TESTNAME} PRIVATE ../src)
+    target_include_directories(${TESTNAME} PRIVATE ${EXTERN_INCLUDE_DIRS} ../src)
     target_link_libraries(${TESTNAME} gtest gtest_main ${ARGN})
     gtest_discover_tests(${TESTNAME}
         SOURCES ${FILES}
