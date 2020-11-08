@@ -9,4 +9,5 @@ add_library(engine_render SHARED ${SRC_FILES})
 # (e.g. logging library isn't needed there)
 target_include_directories(engine_render PRIVATE ${EXTERN_INCLUDE_DIRS} ../..) 
 
-target_link_libraries(engine_render engine_core) 
+# TODO(laralex): maybe some cmake variables for common libraries names and include paths
+target_link_libraries(engine_render engine_core glad glfw) 

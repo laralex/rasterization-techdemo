@@ -33,8 +33,16 @@ set(EXTERN_SOURCE_DIR ${CMAKE_SOURCE_DIR}/extern)
 add_subdirectory(${EXTERN_SOURCE_DIR}/spdlog ${EXTERN_BUILD_DIR}/spdlog)
 list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/spdlog/include)
 
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(${EXTERN_SOURCE_DIR}/glfw ${EXTERN_BUILD_DIR}/glfw)
 list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/glfw/include)
+
+add_library(glad STATIC ${EXTERN_SOURCE_DIR}/glad/src/glad.c)
+target_include_directories(glad PRIVATE ${EXTERN_SOURCE_DIR}/glad/include)
+list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/glad/include)
+
 
 # ==== project libraries and executables ====
 # TODO(laralex): need to install libraries in some way (put files in e.g. /include and /lib)
