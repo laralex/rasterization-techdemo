@@ -41,7 +41,6 @@ macro(assemble_test TESTNAME FILES)
 endmacro()
 
 # ==== tests ====
-message(STATUS "> BUILDING TESTS")
 assemble_test(unit_tests example_test.cpp engine_render)
 
 # ==== keep cache cleaner ====

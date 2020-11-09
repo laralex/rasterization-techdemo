@@ -35,11 +35,11 @@ add_subdirectory(${EXTERN_SOURCE_DIR}/spdlog ${EXTERN_BUILD_DIR}/spdlog)
 list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/spdlog/include)
 
 # > glfw -- everything for openGL, vulkan and cross-platform windows
-# TODO(laralex): disable warnings
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(${EXTERN_SOURCE_DIR}/glfw ${EXTERN_BUILD_DIR}/glfw)
+set_target_properties(glfw PROPERTIES COMPILE_FLAGS "-w") # no warnings
 list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/glfw/include)
 
 # > glad -- load openGL for the target machine
@@ -76,6 +76,7 @@ add_subdirectory(src/techdemo ${${OUTPUT_DIRECTORY}}/obj/techdemo)
 
 # ==== tests ====
 if(PACKAGE_TESTS)
+    message(STATUS "> BUILDING TESTS")
     enable_testing()
     add_subdirectory(test)
 endif()
