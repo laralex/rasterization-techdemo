@@ -15,7 +15,7 @@ string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE)
 set(BUILD_TYPES debug release)
 if (CMAKE_BUILD_TYPE MATCHES debug)
     add_definitions(-DDEBUG)
-elseif(NOT ${CMAKE_BUILD_TYPE} IN_LIST ${BUILD_TYPES})
+elseif(NOT ${CMAKE_BUILD_TYPE} IN_LIST BUILD_TYPES)
     message(FATAL_ERROR "> UKNOWN BUILD TYPE: neither of ${BUILD_TYPES}")
 endif()
 
