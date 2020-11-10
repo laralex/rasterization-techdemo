@@ -26,6 +26,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 #set(gtest_disable_pthreads ON CACHE BOOL "" FORCE)
 #set(CMAKE_CTEST_COMMAND "${CMAKE_CTEST_COMMAND} --output-log ${CMAKE_BINARY_DIR}/test/ctestlog" CACHE STRING "" FORCE)
+
 # define the gtest and gtest_main targets.
 add_subdirectory(${GTEST_PATH}/src ${GTEST_PATH}/build EXCLUDE_FROM_ALL)
 set_target_properties(gtest_main gmock_main gtest gmock PROPERTIES 
