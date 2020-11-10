@@ -23,10 +23,15 @@ endif()
 
 # prevent overriding compiler/linker settings (on Windows)
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+set(INSTALL_GTEST OFF CACHE BOOL "Install GoogleTest" FORCE)
 
 # define the gtest and gtest_main targets.
 add_subdirectory(${GTEST_PATH}/src ${GTEST_PATH}/build EXCLUDE_FROM_ALL)
-
+set_target_properties(gtest_main gmock_main gtest gmock PROPERTIES 
+    RUNTIME_OUTPUT_DIRECTORY "${GTEST_PATH}/bin"
+    LIBRARY_OUTPUT_DIRECTORY "${GTEST_PATH}/lib"
+    ARCHIVE_OUTPUT_DIRECTORY "${GTEST_PATH}/lib"
+    PDB_OUTPUT_DIRECTORY     "${GTEST_PATH}/bin")
 # ==== to shrink repetitive code ====
 macro(assemble_test TESTNAME FILES)
     add_executable(${TESTNAME} ${FILES})

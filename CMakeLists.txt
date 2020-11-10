@@ -21,13 +21,15 @@ endif()
 
 # ==== artifacts folders ====
 # TODO(laralex): need to tidy up artifacts from external libraries and CMake itself
+# set(CMAKE_INSTALL_LIBDIR "extern" CACHE INTERNAL STRING FORCE)
 string(TOUPPER "CMAKE_RUNTIME_OUTPUT_DIRECTORY_${CMAKE_BUILD_TYPE}" OUTPUT_DIRECTORY) # debug to DEBUG
-set(${OUTPUT_DIRECTORY} ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE})
+set(${OUTPUT_DIRECTORY} ${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE})
 message(STATUS "> BUILD TYPE = ${CMAKE_BUILD_TYPE}")
 
 # ==== install external libs ====
-# TODO(laralex): check if Debug project build builds Release externals
-set(EXTERN_BUILD_DIR ${CMAKE_BINARY_DIR}/extern)
+# MAYBE(laralex): check if Debug project build builds Release externals,
+# actually for debugging purposes it's better to have more detailed crashes, so forget it
+set(EXTERN_BUILD_DIR  ${CMAKE_BINARY_DIR}/extern/${CMAKE_BUILD_TYPE})
 set(EXTERN_SOURCE_DIR ${CMAKE_SOURCE_DIR}/extern)
 
 # > spdlog -- logging
@@ -59,14 +61,18 @@ list(APPEND EXTERN_INCLUDE_DIRS ${EXTERN_SOURCE_DIR}/glm/include)
 # TODO(laralex): maybe not PRIVATE includes
 set(IMGUI_INCLUDE_DIR ${EXTERN_SOURCE_DIR}/imgui_)
 file(GLOB   IMGUI_SRC_FILES ${IMGUI_INCLUDE_DIR}/imgui/*.cpp)
-list(APPEND IMGUI_SRC_FILES ${IMGUI_INCLUDE_DIR}/imgui/backends/imgui_impl_glfw.cpp ${IMGUI_INCLUDE_DIR}/imgui/backends/imgui_impl_opengl3.cpp)
+list(APPEND IMGUI_SRC_FILES ${IMGUI_INCLUDE_DIR}/imgui/backends/imgui_impl_glfw.cpp 
+                            ${IMGUI_INCLUDE_DIR}/imgui/backends/imgui_impl_opengl3.cpp)
 add_library(imgui STATIC ${IMGUI_SRC_FILES})
 target_include_directories(imgui PRIVATE ${IMGUI_INCLUDE_DIR}/imgui ${EXTERN_SOURCE_DIR}/glfw/include)
 target_compile_definitions(imgui PRIVATE 
     -DIMGUI_IMPL_OPENGL_LOADER_GLAD 
     -DIMGUI_USER_CONFIG="${CMAKE_SOURCE_DIR}/src/engine/gui/custom_imgui_config.h")
 target_link_libraries(imgui glfw glad)
-# NOTE: I like including via <imgui/imgui.h>, but imgui internals sadly use just "imgui.h", so I have to expose them like that
+set_target_properties(imgui PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${EXTERN_BUILD_DIR}/imgui")
+# NOTE(laralex): I like including via <imgui/imgui.h>, but imgui internals sadly use just "imgui.h", 
+# so I have to expose them like that
 list(APPEND EXTERN_INCLUDE_DIRS ${IMGUI_INCLUDE_DIR} ${IMGUI_INCLUDE_DIR}/imgui) 
 
 # ==== project libraries and executables ====
